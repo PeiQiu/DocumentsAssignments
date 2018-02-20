@@ -1,0 +1,78 @@
+<div>
+    <div class="page">
+        <h2>Review Documents</h2>
+        <div style="margin-bottom:2em;margin-top: 2em">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" style="width: 6em" type="text" ng-model="filter.title"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" ng-model="filter.type">
+                        <option></option>
+                        <option>RULE</option>
+                        <option>PRORULE</option>
+                        <option>NOTICE</option>
+                        <option>PRESDOCU</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input_zipcode">Zip Code</label>
+                    <input type="text" class="form-control" ng-model="filter.zipcode" style="width: 6em;"
+                           id="input_zipcode">
+                </div>
+                <div class="form-group">
+                    <label>Significance</label>
+                    <select class="form-control" ng-model="filter.significance">
+                        <option></option>
+                        <option>true</option>
+                        <option>false</option>
+                    </select></div>
+                <div class="form-group">
+                    <label>Review</label>
+                    <select class="form-control" ng-model="filter.isReviewed">
+                        <option></option>
+                        <option>true</option>
+                        <option>false</option>
+                    </select></div>
+                <span class="glyphicon glyphicon-search" style="margin-left: 1em" ng-click="search()"
+                      aria-hidden="true"></span>
+            </form>
+            <span ng-show="service.dirty()" class="pull-right btn btn-xs btn-primary" ng-click="service.apply()"
+                  style="margin-left: 1em;">
+					<span class="glyphicon glyphicon-filter"></span>
+				</span>
+
+            <span ng-show="service.hasFilters()" class="pull-right btn btn-xs btn-default" ng-click="service.clear()">
+					<span class="glyphicon glyphicon-remove-circle"></span>
+				</span>
+        </div>
+    </div>
+    <div ng-repeat="(r,re) in reviews">
+        <div>
+            <article class="post">
+                <header class="post-header">
+                    <h2 class="post-title"><a target="_blank" ng-href="{{re.doc.html_url}}">{{re.doc.title}}</a></h2>
+                </header>
+                <!--<div class="collapse" id="collapse{{re.doc.document_number}}">-->
+                <!--<div class="well">-->
+                <!--{{re.doc.abstract}}-->
+                <!--</div>-->
+                <!--</div>-->
+                <footer>
+                    <span>{{re.doc.document_number}}</span>
+                    <div class="pull-right">
+
+                        <span style="margin:15px 0;">Rate: <b>{{reviews[r].rank==-1?'unfinished':reviews[r].rank}}</b></span>
+                        <span uib-rating ng-model="reviews[r].rank" max="max" style="padding-left:1em;color:orangered;"
+                              read-only="re.isReviewed" on-hover="hoveringOver(value)" on-leave="overStar = null"
+                              ng-click="rate(re)" aria-labelledby="default-rating"></span>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>
+

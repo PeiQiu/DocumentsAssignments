@@ -1,0 +1,139 @@
+<div ng-if="isDoc">
+    <div class="page">
+        <h2>All Documents</h2>
+        <div style="margin-bottom:2em;margin-top: 2em">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input class="form-control" style="width: 8em" type="text" ng-model="filter.title"
+                           class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" ng-model="filter.type">
+                        <option></option>
+                        <option>RULE</option>
+                        <option>PRORULE</option>
+                        <option>NOTICE</option>
+                        <option>PRESDOCU</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input_zipcode">Zip Code</label>
+                    <input type="text" class="form-control" ng-model="filter.zipcode" style="width: 6em;"
+                           id="input_zipcode">
+                </div>
+                <div class="form-group">
+                    <label>Significance</label>
+                    <select class="form-control" ng-model="filter.significance">
+                        <option></option>
+                        <option>0</option>
+                        <option>1</option>
+                    </select></div>
+                <span class="glyphicon glyphicon-search" style="margin-left: 1em" ng-click="search()"
+                      aria-hidden="true"></span>
+            </form>
+            <span ng-show="service.dirty()" class="pull-right btn btn-xs btn-primary" ng-click="service.apply()"
+                  style="margin-left: 1em;">
+					<span class="glyphicon glyphicon-filter"></span>
+				</span>
+
+            <span ng-show="service.hasFilters()" class="pull-right btn btn-xs btn-default" ng-click="service.clear()">
+					<span class="glyphicon glyphicon-remove-circle"></span>
+				</span>
+        </div>
+    </div>
+    <div class="col-md-2 navbar-fixed-top" style="margin-top: 6em;">
+        <div class="panel-body tags">
+            <!--<input type="text" class="form-control" placeholder="List Name" style="margin-bottom: 1em;border: none">-->
+            <a class="label label-info" ng-click="showUsers()" style="margin-left: 3em">User</a>
+            <a class="label label-warning" ng-click="save()">Save</a>
+            <div style=" max-height:28em;overflow:scroll;margin-top: 1em">
+                <div ng-repeat="(i,item) in doclist">
+                    <div style="border: solid 1px darkgrey; padding: .5em;border-radius:2em;margin: .5em">
+                        <span class="badge" style="color: black;background-color: white">D</span>
+                        <span style="margin-right: .2em">{{item.document_number}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"
+                              ng-click="removeDoc(i)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="doc in docs">
+        <div>
+            <article class="post">
+                <header class="post-header">
+                    <h2 class="post-title"><a href="">{{doc.title}}</a></h2>
+                </header>
+                <section class="post-excerpt">
+                    <p>{{doc.abstract|ecplise}}<a class="read-more" href="">»</a></p>
+                </section>
+                <footer>
+                    <span ng-click="add(doc,doc.document_number)" style="margin-right: 1em"
+                          class="label label-info"><span class="glyphicon glyphicon-arrow-left"></span><span
+                            style="margin-left: .2em;">Add to list</span></span><span>{{doc.document_number}}</span>
+                </footer>
+            </article>
+        </div>
+    </div>
+    <nav class=" page">
+        <ul class="pager ">
+            <li ng-click="prev()" class="previous" ng-if="data.previous_page_url"><a><span
+                    aria-hidden="true">&larr;</span> Prev</a></li>
+            <span>Page {{page}}</span>
+            <li ng-click="next()" class="next" ng-if="data.next_page_url"><a>Next <span
+                    aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
+</div>
+<div class="page" ng-if="!isDoc">
+    <h2>All Users</h2>
+    <div style="margin-bottom:2em;margin-top: 2em">
+        <div>
+            <div style="margin-bottom:1em;">
+                <input type="text" class="input-sm form-control" placeholder="Search for..."
+                       ng-model="service.filter.phrase">
+            </div>
+            <span ng-show="service.dirty()" class="pull-right btn btn-xs btn-primary" ng-click="service.apply()"
+                  style="margin-left: 1em;">
+					<span class="glyphicon glyphicon-filter"></span>
+				</span>
+
+            <span ng-show="service.hasFilters()" class="pull-right btn btn-xs btn-default" ng-click="service.clear()">
+					<span class="glyphicon glyphicon-remove-circle"></span>
+				</span>
+        </div>
+    </div>
+    <div class="col-md-2 navbar-fixed-top" style="margin-top: 6em;">
+        <div class="panel-body tags">
+            <a class="label label-info" id="a_document" ng-click=" showDocs()" style="margin-left: 3em">Doc</a>
+            <a class="label label-warning" ng-click="save()"> Save</a>
+            <div style=" max-height:28em;overflow:scroll;margin-top: 2em">
+                <div ng-repeat="(un,username) in userNameList">
+                    <div style="border: solid 1px darkgrey; padding: .5em;border-radius:2em;margin: .5em">
+                        <span class="badge" style="color: black;background-color: white">U</span>
+                        <span style="margin-right: .2em">{{username}}</span>
+                        <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"
+                              ng-click="removeUser(un)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="user in users">
+
+        <article class="user">
+            <header class="post-header">
+                <span class="username"><a href="" style="font-size: 2em;margin-right: 1em;">{{user.username}}</a></span><span
+                    class="pull-right">({{user.email}})</span><span class="pull-right" style="margin-right: .4em">{{user.first+" "+user.last}}</span>
+            </header>
+            <footer>
+                <span ng-click="addUser(user.username)" style="margin-right: 1em" class="label label-info"><span
+                        class="glyphicon glyphicon-arrow-left"></span><span
+                        style="margin-left: .2em;">Add to list</span></span>
+            </footer>
+        </article>
+    </div>
+
+</div>

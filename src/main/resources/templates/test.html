@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<nav  class="navbar white navbar-default navbar-fixed-top">
+    <div class="container-fluid row attr-row">
+        <div ng-click="logoClicked()"  style="height: 24px; margin-top:9px; line-height: 45px;">
+            <img src="/static/img/logo-full.svg" class="md-avatar"/>
+        </div>
+        <div class="navbar-right" ng-if="appData.lastName">
+            <div class="dropdown" uib-dropdown dropdown-append-to-body style=" line-height: 45px;">
+                <div uib-dropdown-toggle
+                     style="color: #23b1d1; white-space: nowrap; cursor: pointer;">
+                    <span>{{ appData.firstName }} {{ appData.lastName }}</span>
+                    <span class="caret"></span>
+                </div>
+                <div class="dropdown-menu-right" uib-dropdown-menu style="min-width: 130px;">
+                    <li role="menuitem">
+                        <a ng-click="settings()">
+<span><i class="glyphicon glyphicon glyphicon-wrench" style="margin-right: 8px;"></i>
+Change Password
+</span>
+                        </a>
+                    </li>
+                    <li role="menuitem">
+                        <a ng-click="logout()">
+<span><i class="glyphicon glyphicon-log-out" style="margin-right: 8px;"></i>
+Sign out
+</span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+</body>
+</html>

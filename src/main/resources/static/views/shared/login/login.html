@@ -1,0 +1,9 @@
+<div>
+	<form class=" col-md-3 col-md-offset-5" name="loginForm"style="margin-top: 8%" id="login-form">
+		<h3>Sign In</h3>
+		<span class="error-msg" id="warning" ng-show="hasError">Error with username/password</span> 
+		<input type="text" class="form-control" placeholder="username" name="username" ng-model="username" required><br> 
+		<input type="password" class="form-control" placeholder="password" name="password" ng-model="password" required><br> 
+		<input class="pull-right" type="submit" value="Sign In" ng-click="loginForm.$valid && login()" >
+	</form>
+</div>

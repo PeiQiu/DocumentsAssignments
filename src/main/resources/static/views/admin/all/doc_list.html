@@ -1,0 +1,45 @@
+<div>
+    <div class="page">
+        <h2>Document Lists</h2>
+        <div ng-repeat="(l,list) in doclists">
+            <div class="user">
+                <span><a ng-click="edit(list)">{{list.id}}</a></span>
+                <button class="btn btn-default pull-right" role="button" ng-click="edit(list)">
+                    Edit
+                </button>
+                <button class="btn btn-default pull-right" style="margin-right: 1em" type="button"
+                        data-toggle="collapse" data-target="#collapse_users{{list.id}}" aria-expanded="false"
+                        aria-controls="collapse_users{{list.id}}">
+                    Users
+                </button>
+                <button class="btn btn-default pull-right" style="margin-right: 1em" role="button"
+                        data-toggle="collapse" data-target="#collapse_docs{{list.id}}" aria-expanded="false"
+                        aria-controls="collapse_docs{{list.id}}">
+                    Documents
+                </button>
+                <div style="margin-top: 2em" class="collapse" id="collapse_docs{{list.id}}">
+                    <div>
+                        <div ng-repeat="(i,item) in list.docs">
+                            <div style="border: solid 1px darkgrey; padding: .5em;border-radius:2em;margin: .5em">
+                                <span class="badge" style="color: black;background-color: white">D</span>
+                                <span style="margin-right: .2em">{{item.document_number}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 2em" class="collapse" id="collapse_users{{list.id}}">
+                    <div>
+                        <div ng-repeat="(un,username) in list.users">
+                            <div style="border: solid 1px darkgrey; padding: .5em;border-radius:2em;margin: .5em">
+                                <span class="badge" style="color: black;background-color: white">U</span>
+                                <span style="margin-right: .2em">{{username}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
